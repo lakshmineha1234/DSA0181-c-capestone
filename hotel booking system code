@@ -1,0 +1,125 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class Customer {
+public:
+    string name;
+    string email;
+    string phone;
+
+    Customer(string n, string e, string p) : name(n), email(e), phone(p) {}
+
+    void displayCustomer() {
+        cout << "Name: " << name << ", Email: " << email << ", Phone: " << phone << endl;
+    }
+};
+
+class Room {
+public:
+    int roomNumber;
+    string type;
+    bool isAvailable;
+
+    Room(int num, string t) : roomNumber(num), type(t), isAvailable(true) {}
+
+    void displayRoom() {
+        cout << "Room Number: " << roomNumber << ", Type: " << type << ", Available: " << (isAvailable ? "Yes" : "No") << endl;
+    }
+};
+
+class Booking {
+public:
+    int bookingId;
+    string customerName;
+    int roomNumber;
+
+    Booking(int id, string cname, int rnum) : bookingId(id), customerName(cname), roomNumber(rnum) {}
+
+    void displayBooking() {
+        cout << "Booking ID: " << bookingId << ", Customer: " << customerName << ", Room: " << roomNumber << endl;
+    }
+};
+
+class Payment {
+public:
+    int paymentId;
+    double amount;
+    string paymentMethod;
+
+    Payment(int id, double amt, string method) : paymentId(id), amount(amt), paymentMethod(method) {}
+
+    void displayPayment() {
+        cout << "Payment ID: " << paymentId << ", Amount: " << amount << ", Method: " << paymentMethod << endl;
+    }
+};
+
+class Staff {
+public:
+    int staffId;
+    string name;
+    string role;
+
+    Staff(int id, string n, string r) : staffId(id), name(n), role(r) {}
+
+    void displayStaff() {
+        cout << "Staff ID: " << staffId << ", Name: " << name << ", Role: " << role << endl;
+    }
+};
+
+class FoodOrder {
+public:
+    int orderId;
+    string customerName;
+    string foodItem;
+    double price;
+
+    FoodOrder(int id, string cname, string item, double p) : orderId(id), customerName(cname), foodItem(item), price(p) {}
+
+    void displayOrder() {
+        cout << "Order ID: " << orderId << ", Customer: " << customerName << ", Food Item: " << foodItem << ", Price: " << price << endl;
+    }
+};
+
+class Report {
+public:
+    static void generateInvoice(string customerName, double amount) {
+        cout << "Invoice for " << customerName << endl;
+        cout << "Amount Due: " << amount << endl;
+    }
+
+    static void generateReport(vector<Customer> customers, vector<Room> rooms) {
+        cout << "Customer Report:" << endl;
+        for (size_t i = 0; i < customers.size(); ++i) {
+            customers[i].displayCustomer();
+        }
+        cout << "\nRoom Report:" << endl;
+        for (size_t i = 0; i < rooms.size(); ++i) {
+            rooms[i].displayRoom();
+        }
+    }
+};
+
+int main() {
+    vector<Customer> customers;
+    vector<Room> rooms;
+    vector<Booking> bookings;
+    vector<Payment> payments;
+    vector<Staff> staff;
+    vector<FoodOrder> foodOrders;
+
+    customers.push_back(Customer("John Doe", "john@example.com", "1234567890"));
+    rooms.push_back(Room(101, "Single"));
+    rooms.push_back(Room(102, "Double"));
+    bookings.push_back(Booking(1, "John Doe", 101));
+    payments.push_back(Payment(1, 150.0, "Credit Card"));
+    staff.push_back(Staff(1, "Alice", "Manager"));
+    foodOrders.push_back(FoodOrder(1, "John Doe", "Pizza", 12.5));
+
+    Report::generateReport(customers, rooms);
+    Report::generateInvoice("John Doe", 162.5);
+
+    return 0;
+}
